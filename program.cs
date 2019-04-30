@@ -81,8 +81,9 @@ namespace FBConsole
         {
 
             FirebaseResponse response = firebaseClient.Get("Customer");
-            var result = response.ResultAs<RestSharp.JsonArray>();
-
+            var result = response.ResultAs<List<Data>>();
+            result.RemoveAt(0);
+            result.ForEach(d => Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(d)));
         }
 
         static private void GetOne()
@@ -105,11 +106,13 @@ namespace FBConsole
             }
             try
             {
-               Add();
-               GetOne();
-               Push();
-               Update();
-               Delete();
+                Add();
+                GetOne();
+                Push();
+                Update();
+                GetAll();
+                Delete();
+
             }
             catch (Exception ex)
             {
