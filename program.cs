@@ -90,7 +90,6 @@ namespace FBConsole
         {
             FirebaseResponse response = firebaseClient.Get("Customer/1");
             
-            Console.WriteLine("111111111");
             Data result = response.ResultAs<Data>();
 
             Console.WriteLine(result.ID);
