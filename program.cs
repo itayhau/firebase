@@ -21,7 +21,7 @@ namespace FBConsole
             BasePath = "https://demo1-25b64.firebaseio.com/"
         };
 
-        static private async Task Push()
+        static private void Push()
         {
             var data = new Data
             {
@@ -29,13 +29,13 @@ namespace FBConsole
                 Name = "AUSTIN"
             };
 
-            PushResponse response = await firebaseClient.PushTaskAsync("Customer/1", data);
+            PushResponse response = firebaseClient.Push("Customer/1", data);
             Data result = response.ResultAs<Data>();
 
             Console.WriteLine("Data pushed " + data.ID);
         }
 
-        static private async Task Update()
+        static private void Update()
         {
             var data = new Data
             {
@@ -43,14 +43,14 @@ namespace FBConsole
                 Name = "AUSTIN !"
             };
 
-            FirebaseResponse response = await firebaseClient.UpdateTaskAsync("Customer/1", data);
+            FirebaseResponse response = firebaseClient.Update("Customer/1", data);
             Data result = response.ResultAs<Data>();
 
             Console.WriteLine("Data updated " + data.ID);
         }
 
 
-        static private async Task Delete()
+        static private void Delete()
         {
             var data = new Data
             {
@@ -58,12 +58,12 @@ namespace FBConsole
                 Name = "AUSTIN"
             };
 
-            DeleteResponse response = await firebaseClient.DeleteTaskAsync("Customer/1");
+            DeleteResponse response = firebaseClient.Delete("Customer/1");
 
             Console.WriteLine("Data deleted " + data.ID);
         }
 
-        static private async Task Add()
+        static private void Add()
         {
             var data = new Data
             {
@@ -71,23 +71,23 @@ namespace FBConsole
                 Name = "AUSTIN"
             };
 
-            SetResponse response = await firebaseClient.SetTaskAsync("Customer/1", data);
+            SetResponse response = firebaseClient.Set("Customer/1", data);
             Data result = response.ResultAs<Data>();
 
             Console.WriteLine("Data inserted " + data.ID);
         }
 
-        static private async Task GetAll()
+        static private void GetAll()
         {
 
-            FirebaseResponse response = await firebaseClient.GetTaskAsync("Customer");
+            FirebaseResponse response = firebaseClient.Get("Customer");
             var result = response.ResultAs<RestSharp.JsonArray>();
 
         }
 
-        static private async Task GetOne()
+        static private void GetOne()
         {
-            FirebaseResponse response = await firebaseClient.GetTaskAsync("Customer/1");
+            FirebaseResponse response = firebaseClient.Get("Customer/1");
             
             Console.WriteLine("111111111");
             Data result = response.ResultAs<Data>();
@@ -105,11 +105,11 @@ namespace FBConsole
             }
             try
             {
-                Add().Wait();
-                //GetOne().Wait();
-                //Push().Wait();
-                //Update().Wait();
-                //Delete().Wait();
+               Add();
+               GetOne();
+               Push();
+               Update();
+               Delete();
             }
             catch (Exception ex)
             {
